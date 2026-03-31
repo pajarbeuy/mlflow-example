@@ -1,5 +1,5 @@
-name : CI MLflow
-
+name: CI MLflow
+ 
 on:
   push:
     branches:
@@ -7,46 +7,40 @@ on:
   pull_request:
     branches:
       - master
-
+ 
 env:
   CSV_URL: "Project/wine-quality.csv"
   TARGET_VAR: "quality"
   ALPHA: 0.5
   L1_RATIO: 0.5
   RANDOM_STATE: 42
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+ 
     steps:
-      # checkout your repo under $github_workspace
+      # Checks-out your repository under $GITHUB_WORKSPACE
       - uses: actions/checkout@v3
-
-      # setup python
+ 
+      # Setup Python 3.12.7
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
           python-version: "3.12.7"
-
-      # check env variabel
-      - name: Check env
+      
+      # Check Env Variables
+      - name: Check Env
         run: |
           echo $CSV_URL
-
-      # install mlflow
-      - name: Install Dependencies
+ 
+      # Install mlflow
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install mlflow
-
-      # run as administrator
+      
+      # Run as a mlflow project
       - name: Run mlflow project
         run: |
-          mlflow run Project --env-manager=local
-        
-
-
-
-
-      
+          mlflow run Project --env-manager=local 
